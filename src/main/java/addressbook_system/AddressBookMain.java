@@ -1,5 +1,6 @@
 package addressbook_system;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -8,6 +9,8 @@ public class AddressBookMain {
 
     static final int ADD_CONTACT = 1;
     static final int EXIT = 2;
+
+    public static ArrayList<Contact> contacts = new ArrayList<Contact>();
 
     static int displayChoices(){
         
@@ -23,6 +26,33 @@ public class AddressBookMain {
 
         return choice;
     }
+
+    static void setContactInformation(Contact newContact)
+    {
+            System.out.println("Enter First Name: ");
+            newContact.setFirstName(scannerObject.next());
+    
+            System.out.println("Enter Last Name: ");
+            newContact.setLastName(scannerObject.next());
+    
+            System.out.println("Enter Address: ");
+            newContact.setAddress(scannerObject.next());
+    
+            System.out.println("Enter City: ");
+            newContact.setCity(scannerObject.next());
+    
+            System.out.println("Enter State: ");
+            newContact.setState(scannerObject.next());
+    
+            System.out.println("Enter Zip Code: ");
+            newContact.setZipCode(scannerObject.nextInt());
+    
+            System.out.println("Enter Phone Number: ");
+            newContact.setPhoneNumber(scannerObject.nextLong());
+    
+            System.out.println("Enter Email Id: ");
+            newContact.setEmail(scannerObject.next());
+    }
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
 
@@ -33,8 +63,13 @@ public class AddressBookMain {
             switch (userChoice) {
                 case ADD_CONTACT:
                     Contact newContact = new Contact();
-                    newContact.getDetails();
+                    setContactInformation(newContact);
+                    contacts.add(newContact);
+
                     newContact.displayContact();
+
+                    System.out.println("Size of AddressBook is: " + contacts.size());                    
+                    System.out.println();
                     break;
                 case EXIT:
                     scannerObject.close();

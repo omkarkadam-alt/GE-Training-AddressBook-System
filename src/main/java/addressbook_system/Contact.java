@@ -64,33 +64,6 @@ class Contact {
         this.email = email;
     }
 
-    public void getDetails(){
-
-        System.out.println("Enter First Name: ");
-        setFirstName(scannerObject.next());
-
-        System.out.println("Enter Last Name: ");
-        setLastName(scannerObject.next());
-
-        System.out.println("Enter Address: ");
-        setAddress(scannerObject.next());
-
-        System.out.println("Enter City: ");
-        setCity(scannerObject.next());
-
-        System.out.println("Enter State: ");
-        setState(scannerObject.next());
-
-        System.out.println("Enter Zip Code: ");
-        setZipCode(scannerObject.nextInt());
-
-        System.out.println("Enter Phone Number: ");
-        setPhoneNumber(scannerObject.nextLong());
-
-        System.out.println("Enter Email Id: ");
-        setEmail(scannerObject.next());
-    }
-
     public void displayContact(){
 
         System.out.println();
@@ -106,6 +79,5 @@ class Contact {
         System.out.println("Phone Number: " + this.phoneNumber);
         System.out.println("Email Id: " + this.email);
         System.out.println("----------------------------------------");
-        System.out.println();
     }
 }
