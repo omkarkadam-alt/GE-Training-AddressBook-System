@@ -8,14 +8,18 @@ public class AddressBookMain {
     static Scanner scannerObject = new Scanner(System.in);
 
     static final int ADD_CONTACT = 1;
-    static final int EXIT = 2;
+    static final int EDIT_CONTACT = 2;
+    static final int DISPLAY_ADDRESS_BOOK = 3;
+    static final int EXIT = 4;
 
     public static ArrayList<Contact> contacts = new ArrayList<Contact>();
 
     static int displayChoices(){
         
-        System.out.println("1.] Add a contact");
-        System.out.println("2.] Exit");
+        System.out.println("1.] Add contact");
+        System.out.println("2.] Edit contact");
+        System.out.println("3.] Display Address Book");
+        System.out.println("4.] Exit");
 
         System.out.println("Enter your choice: ");
         
@@ -53,6 +57,68 @@ public class AddressBookMain {
             System.out.println("Enter Email Id: ");
             newContact.setEmail(scannerObject.next());
     }
+
+    static int getEditChoice()
+    {
+            System.out.println("1.] Edit First Name");   
+            System.out.println("2.] Edit Last Name");
+            System.out.println("3.] Edit Address");
+            System.out.println("4.] Edit City");
+            System.out.println("5.] Edit State");
+            System.out.println("6.] Edit Zip Code");
+            System.out.println("7.] Edit Phone Number");
+            System.out.println("8.] Edit Email Id");
+
+            System.out.println();
+            System.out.println("Enter the field number you wish to edit: ");
+
+            int editChoice = scannerObject.nextInt();
+            return editChoice;
+    }
+
+    static int getEditIndex(String firstName)
+    {
+        int editIndex = -1;
+        int addressBookSize = contacts.size();
+        
+        for(int currIndex = 0; currIndex < addressBookSize; currIndex++)
+        {
+            if(contacts.get(currIndex).getFirstName().equals(firstName))
+            {
+                editIndex = currIndex;
+                break;
+            }
+        }
+
+        return editIndex;
+    }
+
+    static void printAddressBook()
+    {
+        int addressBookSize = contacts.size();
+
+        System.out.println("-------------------------------------------------");
+        if(addressBookSize == 0)
+        {
+            
+            System.out.println("Address Book is empty.");
+            System.out.println("-------------------------------------------------");
+            System.out.println();
+            return;
+        }
+
+        for(int currIdx = 0; currIdx < addressBookSize; currIdx++)
+        {
+            System.out.print("Contact Number: " + (currIdx + 1));
+            contacts.get(currIdx).displayContact();
+            System.out.println();
+            System.out.println();
+        }
+        System.out.println("-------------------------------------------------");
+        System.out.println();
+        return;
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
 
@@ -71,6 +137,26 @@ public class AddressBookMain {
                     System.out.println("Size of AddressBook is: " + contacts.size());                    
                     System.out.println();
                     break;
+
+                case EDIT_CONTACT:
+
+                    System.out.println("Enter the name of the contact to be edited: ");
+                    String editContactName = scannerObject.next();
+
+                    int editIndex = getEditIndex(editContactName);
+                    if(editIndex < 0){
+                        System.out.println("Contact Not Found in the Address Book.");
+                    }else{
+                        int editChoice = getEditChoice();
+                        contacts.get(editIndex).editField(editChoice);
+                    }
+
+                    break;
+                
+                case DISPLAY_ADDRESS_BOOK:
+                    printAddressBook();
+                    break;
+                
                 case EXIT:
                     scannerObject.close();
                     return;

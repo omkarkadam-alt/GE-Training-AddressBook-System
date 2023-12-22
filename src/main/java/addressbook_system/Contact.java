@@ -80,4 +80,53 @@ class Contact {
         System.out.println("Email Id: " + this.email);
         System.out.println("----------------------------------------");
     }
+
+    public void editField(int editChoice){
+        switch (editChoice) {
+            case 1:
+                System.out.println("Enter Updated First Name: ");
+                String updatedFirstName = scannerObject.next();
+                this.firstName = updatedFirstName;
+                break;
+            case 2:
+                System.out.println("Enter Updated Last Name: ");
+                String updatedLastName = scannerObject.next();
+                this.lastName = updatedLastName;
+                break;
+            case 3:
+                System.out.println("Enter Updated Address: ");
+                String updatedAddress = scannerObject.next();
+                this.address = updatedAddress;
+                break;
+            
+            case 4:
+                System.out.println("Enter Updated City: ");
+                String updatedCity = scannerObject.next();
+                this.city = updatedCity;
+                break;
+        
+            case 5:
+                System.out.println("Enter Updated State: ");
+                String updatedState = scannerObject.next();
+                this.state = updatedState;
+                break;
+            case 6:
+                System.out.println("Enter Updated Zip code: ");
+                int updatedZip = scannerObject.nextInt();
+                this.zipCode = updatedZip;
+                break;
+            case 7:
+                System.out.println("Enter Updated Phone Number: ");
+                long updatedPhoneNumber = scannerObject.nextLong();
+                this.phoneNumber = updatedPhoneNumber;
+                break;
+            case 8:
+                System.out.println("Enter Updated Email Id: ");
+                String updatedEmail = scannerObject.next();
+                this.email = updatedEmail;
+                break;
+            default:
+                break;
+        }
+    }
 }
