@@ -9,8 +9,9 @@ public class AddressBookMain {
 
     static final int ADD_CONTACT = 1;
     static final int EDIT_CONTACT = 2;
-    static final int DISPLAY_ADDRESS_BOOK = 3;
-    static final int EXIT = 4;
+    static final int DELETE_CONTACT = 3;
+    static final int DISPLAY_ADDRESS_BOOK = 4;
+    static final int EXIT = 5;
 
     public static ArrayList<Contact> contacts = new ArrayList<Contact>();
 
@@ -18,8 +19,9 @@ public class AddressBookMain {
         
         System.out.println("1.] Add contact");
         System.out.println("2.] Edit contact");
-        System.out.println("3.] Display Address Book");
-        System.out.println("4.] Exit");
+        System.out.println("3.] Delete contact");
+        System.out.println("4.] Display Address Book");
+        System.out.println("5.] Exit");
 
         System.out.println("Enter your choice: ");
         
@@ -76,21 +78,21 @@ public class AddressBookMain {
             return editChoice;
     }
 
-    static int getEditIndex(String firstName)
+    static int getIndex(String firstName)
     {
-        int editIndex = -1;
+        int contactIndex = -1;
         int addressBookSize = contacts.size();
         
         for(int currIndex = 0; currIndex < addressBookSize; currIndex++)
         {
             if(contacts.get(currIndex).getFirstName().equals(firstName))
             {
-                editIndex = currIndex;
+                contactIndex = currIndex;
                 break;
             }
         }
 
-        return editIndex;
+        return contactIndex;
     }
 
     static void printAddressBook()
@@ -143,7 +145,7 @@ public class AddressBookMain {
                     System.out.println("Enter the name of the contact to be edited: ");
                     String editContactName = scannerObject.next();
 
-                    int editIndex = getEditIndex(editContactName);
+                    int editIndex = getIndex(editContactName);
                     if(editIndex < 0){
                         System.out.println("Contact Not Found in the Address Book.");
                     }else{
@@ -151,6 +153,17 @@ public class AddressBookMain {
                         contacts.get(editIndex).editField(editChoice);
                     }
 
+                    break;
+                
+                case DELETE_CONTACT:
+                    System.out.println("Enter the name of the contact to be edited: ");
+                    String deleteContactName = scannerObject.next();
+
+                    int deleteIndex = getIndex(deleteContactName);
+                    if(deleteIndex >= 0){
+                        contacts.remove(deleteIndex);
+                    }
+                    
                     break;
                 
                 case DISPLAY_ADDRESS_BOOK:
