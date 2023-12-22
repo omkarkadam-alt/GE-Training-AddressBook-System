@@ -5,17 +5,20 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 
-    static Scanner scannerObject = new Scanner(System.in);
-
     static final int ADD_CONTACT = 1;
     static final int EDIT_CONTACT = 2;
     static final int DELETE_CONTACT = 3;
     static final int DISPLAY_ADDRESS_BOOK = 4;
     static final int EXIT = 5;
 
-    public static ArrayList<Contact> contacts = new ArrayList<Contact>();
+    public String addressBookName;
+    public ArrayList<Contact> contacts = new ArrayList<Contact>();
 
-    static int displayChoices(){
+    AddressBookMain(String addressBookName){
+        this.addressBookName = addressBookName;
+    }
+
+    static int displayChoices(Scanner scannerObject){
         
         System.out.println("1.] Add contact");
         System.out.println("2.] Edit contact");
@@ -33,7 +36,7 @@ public class AddressBookMain {
         return choice;
     }
 
-    static void setContactInformation(Contact newContact)
+    static void setContactInformation(Contact newContact, Scanner scannerObject)
     {
             System.out.println("Enter First Name: ");
             newContact.setFirstName(scannerObject.next());
@@ -60,7 +63,7 @@ public class AddressBookMain {
             newContact.setEmail(scannerObject.next());
     }
 
-    static int getEditChoice()
+    static int getEditChoice(Scanner scannerObject)
     {
             System.out.println("1.] Edit First Name");   
             System.out.println("2.] Edit Last Name");
@@ -78,7 +81,7 @@ public class AddressBookMain {
             return editChoice;
     }
 
-    static int getIndex(String firstName)
+    int getIndex(String firstName)
     {
         int contactIndex = -1;
         int addressBookSize = contacts.size();
@@ -95,7 +98,7 @@ public class AddressBookMain {
         return contactIndex;
     }
 
-    static void printAddressBook()
+    void printAddressBook()
     {
         int addressBookSize = contacts.size();
 
@@ -121,17 +124,16 @@ public class AddressBookMain {
         return;
     }
 
-    public static void main(String[] args) {
-        System.out.println("Welcome to Address Book Program");
-
+    public void performCRUD(Scanner scannerObject){
+    
         while(true){
             
-            int userChoice = displayChoices();
+            int userChoice = displayChoices(scannerObject);
 
             switch (userChoice) {
                 case ADD_CONTACT:
                     Contact newContact = new Contact();
-                    setContactInformation(newContact);
+                    setContactInformation(newContact, scannerObject);
                     contacts.add(newContact);
 
                     newContact.displayContact();
@@ -149,13 +151,13 @@ public class AddressBookMain {
                     if(editIndex < 0){
                         System.out.println("Contact Not Found in the Address Book.");
                     }else{
-                        int editChoice = getEditChoice();
+                        int editChoice = getEditChoice(scannerObject);
                         contacts.get(editIndex).editField(editChoice);
                     }
                     break;
                 
                 case DELETE_CONTACT:
-                    System.out.println("Enter the name of the contact to be edited: ");
+                    System.out.println("Enter the name of the contact to be deleted: ");
                     String deleteContactName = scannerObject.next();
 
                     int deleteIndex = getIndex(deleteContactName);
@@ -169,7 +171,6 @@ public class AddressBookMain {
                     break;
                 
                 case EXIT:
-                    scannerObject.close();
                     return;
             }
         }
