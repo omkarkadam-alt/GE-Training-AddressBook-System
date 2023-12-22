@@ -152,7 +152,6 @@ public class AddressBookMain {
                         int editChoice = getEditChoice();
                         contacts.get(editIndex).editField(editChoice);
                     }
-
                     break;
                 
                 case DELETE_CONTACT:
@@ -163,7 +162,6 @@ public class AddressBookMain {
                     if(deleteIndex >= 0){
                         contacts.remove(deleteIndex);
                     }
-                    
                     break;
                 
                 case DISPLAY_ADDRESS_BOOK:
